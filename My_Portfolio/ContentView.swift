@@ -14,16 +14,21 @@ struct ContentView: View {
    
     @State var isAnimated: Bool = false;
 
-//    init() { UITableView.appearance().backgroundColor = UIColor.clear}
+    init() { UITableView.appearance().backgroundColor = UIColor.black}
     
     var body: some View {
        
             ZStack{
-                VStack(spacing:0.0){
+                Image("backg")
+                    .resizable()
+//                    .scaledToFill()
             
+                    .edgesIgnoringSafeArea(.all)
+                VStack(spacing:0.0){
+                    
                     Text("Marcos de Gois Borges")
                         .font(.largeTitle)
-                        .foregroundColor(Color("Color2"))
+                        .foregroundColor(Color("Color3"))
                         .padding()
                         .frame(height: 100)
                     HStack{
@@ -31,6 +36,7 @@ struct ContentView: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(Color( red: 255/255, green: 255/255, blue: 255/255, opacity: 1))
                             .scaleEffect(isAnimated ? 2 : 1)
+                            .rotationEffect(Angle(degrees: isAnimated ? 90 : 0))
                             .padding(15)
                             
                         
@@ -43,10 +49,11 @@ struct ContentView: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(Color( red: 255/255, green: 255/255, blue: 255/255, opacity: 1))
                             .scaleEffect(isAnimated ? 2 : 1)
+                            .rotationEffect(Angle(degrees: isAnimated ? 90 : 0))
                             .padding(15)
                         
                             
-                    }.background(Color.white.opacity(0.3))
+                    }.background(Color.black.opacity(0.3))
                         .cornerRadius(20)
                         .frame(width: 400, height: 100)
                         
@@ -60,28 +67,22 @@ struct ContentView: View {
                     
                     List {
                         Section("Menu"){
-                            NavigationLink("Weather API", destination: WeatherView())
+                            NavigationLink("Weather API", destination: WeatherView()).foregroundColor(.black)
                             NavigationLink("Color Picker Utility", destination: ColorPickerView())
                             NavigationLink("About Me", destination: AboutMeView())
                             NavigationLink("Contact", destination: ContactView())
                             NavigationLink("Admin Page", destination: AdminView())
-                            NavigationLink("3D Model", destination: trimodel())
+                            NavigationLink("3D Model", destination: trimodel()).foregroundColor(.red).opacity(1)
+                            
                         }
-                    }.listStyle(InsetGroupedListStyle())
-                        .frame(height: 400)
+                    }.listStyle(.inset)
+                        .frame(height: 300)
+                         
                     
                 }
-                
-            }.background{
-                LinearGradient(gradient: Gradient(colors: [Color("Color3"), Color("Color4")]), startPoint: .top, endPoint: .bottom)
-                    .ignoresSafeArea()
-                
-                
+                                
             }
-        
-            
-        
-        
+
     }
 }
 

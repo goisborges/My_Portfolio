@@ -17,9 +17,11 @@ struct FirstView: View {
     @State var presentSheet: Bool = false
     
     var body: some View {
+        
         NavigationView {
             ZStack{
                 Color("Color2").ignoresSafeArea()
+                
                 VStack {
                     
                     Image("marcos_photo_copy")
