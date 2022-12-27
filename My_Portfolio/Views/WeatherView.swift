@@ -7,73 +7,72 @@
 
 import SwiftUI
 
-class ViewModel: ObservableObject {
-    
-    @Published var weather: WeatherNow = WeatherNow(location: Location(name: "", country: ""), current: Current(temp_c: 0.0))
-    
-    
-    func fetch() {
-        guard let url = URL(string: "http://api.weatherapi.com/v1/current.json?key=077fc99ffc324655801183626223110&q=Barrie&aqi=no") else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            do {
-                let weatherNow = try JSONDecoder().decode(WeatherNow.self, from: data)
-                DispatchQueue.main.async {
-                    self?.weather = weatherNow
-                }
-                
-            }
-            catch {
-    
-                print(error)
-            }
-        }
-        task.resume()
-    }
-}
-
+var weatherManager = WeatherManager()
 
 struct WeatherView: View {
-    @StateObject var viewModel = ViewModel()
+
+    @State private var weathers = WeatherData(name: "", main: Main(temp: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0, feels_like: 0.0), weather: [Weather(description: "", main: "")])
+    
+    @State var cityNameInput: String = "Barrie"
     
     var body: some View {
         NavigationView{
             VStack{
+                HStack{
+                    Text("City:")
+                    TextField("enter a city name", text: $cityNameInput)
+                        .task {
+                            await fetchData(city: cityNameInput)
+                        }
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .onTapGesture {
+                            print(cityNameInput)
+                            Task {
+                                await fetchData(city: cityNameInput)
+                                cityNameInput = ""
+                            }
+                        }
+    
+                }.padding(15)
                 
-                if (viewModel.weather.current.temp_c > 20){
-                Image(systemName: "thermometer.sun.fill")
-                        .scaleEffect(4)
-                        .foregroundColor(Color.yellow)
+                Spacer()
+                VStack{
+                    Text(weathers.name).font(.largeTitle)
+                    Text(weathers.weather[0].description).font(.callout).padding(.bottom)
+                    Text("Temperature: \(String(weathers.main.temp))").font(.headline)
+                    Text("Max temp: \(String(weathers.main.temp_max))")
+                    Text("Min temp: \(String(weathers.main.temp_min))")
                 }
-                else if (viewModel.weather.current.temp_c <= 20 && viewModel.weather.current.temp_c > 5){
-                    Image(systemName: "thermometer.low")
-                        .scaleEffect(4)
-                        .foregroundColor(Color.purple)
-                }
-                else {
-                    Image (systemName: "thermometer.snowflake")
-                        .scaleEffect(4)
-                        .foregroundColor(Color.blue)
-                }
                 
-                
-                
-                
-                Text(String(format: "Weather in \(viewModel.weather.location.name) currently is %.0f ºC", viewModel.weather.current.temp_c))
-                    .font(.title)
-                    .foregroundColor(Color.purple)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 60.0)
-                }.onAppear {
-                    viewModel.fetch()
-                    
-                }.navigationTitle("Weather Now")
+                Spacer()
+ 
+            }.task {
+                await fetchData(city: cityNameInput)
+            }
+            
+        }.navigationTitle("Weather Now")
+        
+    }
+    func fetchData(city: String) async{
+        //create url
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric&q=\(city)") else {
+            print("URL DOESNOT WORK")
+            return
+        }
+        
+        // fetch the data
+        do {
+            let(data, _) = try await URLSession.shared.data(from: url)
+            
+            // decode the data
+            if let decodedResponse = try? JSONDecoder().decode(WeatherData.self, from: data) {
+                weathers = decodedResponse
+            }
+        }
+        catch{
+            print("no response from API")
         }
     }
 }
