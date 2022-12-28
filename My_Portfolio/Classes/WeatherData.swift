@@ -24,6 +24,17 @@ struct Main:Decodable{
 struct Weather: Decodable {
     let description: String
     let main: String
+    
+    var icon: String {
+        switch main {
+        case "Clouds":
+            return "cloud"
+        case "Clear":
+            return "sun.max"
+        default:
+            return "ladybug"
+        }
+    }
 
 }
 

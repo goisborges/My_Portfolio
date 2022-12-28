@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var weatherManager = WeatherManager()
+//var weatherManager = WeatherManager()
 
 struct WeatherView: View {
 
@@ -38,6 +38,7 @@ struct WeatherView: View {
                 }.padding(15)
                 
                 Spacer()
+                Image(systemName: weathers.weather[0].icon).font(.system(size: 90)).padding(5)
                 VStack{
                     Text(weathers.name).font(.largeTitle)
                     Text(weathers.weather[0].description).font(.callout).padding(.bottom)
