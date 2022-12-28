@@ -57,14 +57,23 @@ struct WeatherView: View {
     }
     func fetchData(city: String) async{
         //create url
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric&q=\(city)") else {
-            print("URL DOESNOT WORK")
-            return
-        }
+        let uc = NSURLComponents(string: "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric")!
+        uc.queryItems = [
+            URLQueryItem(name: "q", value: city),
+            URLQueryItem(name: "APPID", value: "9705b25329117ad8563d6f175906a57f"),
+            URLQueryItem(name: "units", value: "metric")
+        ]
+        let finalURL = uc.url!.absoluteURL
+      print(finalURL)
+        
+//        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric&q=\(city)") else {
+//            print("URL DOESNOT WORK")
+//            return
+//        }
         
         // fetch the data
         do {
-            let(data, _) = try await URLSession.shared.data(from: url)
+            let(data, _) = try await URLSession.shared.data(from: finalURL)
             
             // decode the data
             if let decodedResponse = try? JSONDecoder().decode(WeatherData.self, from: data) {

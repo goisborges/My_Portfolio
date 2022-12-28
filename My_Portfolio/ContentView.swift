@@ -56,14 +56,15 @@ struct ContentView: View {
                     }.background(Color.black.opacity(0.3))
                         .cornerRadius(20)
                         .frame(width: 400, height: 100)
+                        .padding(5)
                         
-                    Button("animate") {
-                        withAnimation(.default){
-                            isAnimated.toggle()
-                        }
-                    }
+//                    Button("animate") {
+//                        withAnimation(.default){
+//                            isAnimated.toggle()
+//                        }
+//                    }.padding(10)
                     
-                    Spacer()
+//                    Spacer()
                     
                     List {
                         Section("Menu"){

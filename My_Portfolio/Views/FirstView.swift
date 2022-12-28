@@ -33,9 +33,10 @@ struct FirstView: View {
                         
                     VStack{
                         
-                        Text("Marcos de Gois Borges")
+                        Text("Marcos Borges")
                             .font(.largeTitle)
                             .fontWeight(.heavy)
+                            .padding(8)
                             
                         Text("check my portfolio")
                             .font(.subheadline)

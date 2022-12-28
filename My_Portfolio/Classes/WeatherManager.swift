@@ -23,10 +23,22 @@ struct WeatherManager {
     //api call url
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric"
     
+    
+    
     func fetchWeather(cityName: String) {
-        let urlString = "\(weatherURL)&q=\(cityName)"
-        print(urlString)
-        performRequest(urlString: urlString)
+        // using NSURL components
+        // create URL using NSURL components to solve space issues on string
+        let uc = NSURLComponents(string: "https://api.openweathermap.org/data/2.5/weather?APPID=9705b25329117ad8563d6f175906a57f&units=metric")!
+        uc.queryItems = [
+            URLQueryItem(name: "q", value: cityName)
+        ]
+        let finalURL = uc.url!.absoluteString
+        print("This is the final URL: \(finalURL)")
+        performRequest(urlString: finalURL)
+        
+//        let urlString = "\(weatherURL)&q=\(cityName)"
+//        print(urlString)
+//        performRequest(urlString: urlString)
     }
     
     func performRequest(urlString: String) {
