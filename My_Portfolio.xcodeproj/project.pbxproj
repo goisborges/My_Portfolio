@@ -63,6 +63,7 @@
 		7595ABD928F717D70089543D /* trimodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trimodel.swift; sourceTree = "<group>"; };
 		7595ABDB28F72B620089543D /* character.usdc */ = {isa = PBXFileReference; lastKnownFileType = file; name = character.usdc; path = ../../../Desktop/character.usdc; sourceTree = "<group>"; };
 		7595ABE128F738770089543D /* home_entrance.usdc */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_entrance.usdc; sourceTree = "<group>"; };
+		75A2E170295DF6620042FB64 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		75F270812913F871009B1BBB /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +81,7 @@
 		752F60E628BF04D900547AB9 = {
 			isa = PBXGroup;
 			children = (
+				75A2E170295DF6620042FB64 /* Config.xcconfig */,
 				7595ABDB28F72B620089543D /* character.usdc */,
 				7595ABE128F738770089543D /* home_entrance.usdc */,
 				753CC0F628C256B5008B51FC /* Project+CoreDataClass.swift */,
@@ -261,6 +263,7 @@
 /* Begin XCBuildConfiguration section */
 		752F60FB28BF04DA00547AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75A2E170295DF6620042FB64 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -321,6 +324,7 @@
 		};
 		752F60FC28BF04DA00547AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75A2E170295DF6620042FB64 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
