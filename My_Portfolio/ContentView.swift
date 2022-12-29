@@ -55,7 +55,7 @@ struct ContentView: View {
                             
                     }.background(Color.black.opacity(0.3))
                         .cornerRadius(20)
-                        .frame(width: 400, height: 100)
+                        .frame(width: 400, height: 300)
                         .padding(5)
                         
 //                    Button("animate") {
@@ -64,7 +64,7 @@ struct ContentView: View {
 //                        }
 //                    }.padding(10)
                     
-//                    Spacer()
+                    Spacer()
                     
                     List {
                         Section("Menu"){
@@ -77,7 +77,7 @@ struct ContentView: View {
                             
                         }
                     }.listStyle(.inset)
-                        .frame(height: 300)
+                        
                          
                     
                 }

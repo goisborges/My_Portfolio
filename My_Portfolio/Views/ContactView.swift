@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ContactView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "mail").font(.system(size: 80)).padding(20)
+            Text("E-mail me @").font(.headline)
+            Text("goisborges@gmail.com").font(.title).padding(15)
+        }
+        
     }
 }
 

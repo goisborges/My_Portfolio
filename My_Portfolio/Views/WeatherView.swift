@@ -23,6 +23,11 @@ struct WeatherView: View {
                     TextField("enter a city name", text: $cityNameInput)
                         .task {
                             await fetchData(city: cityNameInput)
+                        }.keyboardShortcut(.return).onSubmit {
+                            Task{
+                                await fetchData(city: cityNameInput)
+                                cityNameInput = ""
+                            }
                         }
                     Image(systemName: "magnifyingglass")
                         .resizable()
@@ -42,9 +47,9 @@ struct WeatherView: View {
                 VStack{
                     Text(weathers.name).font(.largeTitle)
                     Text(weathers.weather[0].description).font(.callout).padding(.bottom)
-                    Text("Temperature: \(String(weathers.main.temp))").font(.headline)
-                    Text("Max temp: \(String(weathers.main.temp_max))")
-                    Text("Min temp: \(String(weathers.main.temp_min))")
+                    Text("Temperature: \(String(format: "%.0f", weathers.main.temp))").font(.headline)
+                    Text("Max temp: \(String(format: "%.0f", weathers.main.temp_max))")
+                    Text("Min temp: \(String(format: "%.0f", weathers.main.temp_min))")
                 }
                 
                 Spacer()
