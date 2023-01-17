@@ -28,11 +28,29 @@ struct Weather: Decodable {
     var icon: String {
         switch main {
         case "Clouds":
-            return "cloud"
+            return "cloud.sun.fill"
         case "Clear":
-            return "sun.max"
+            return "sun.max.fill"
+        case "light rain", "Rain", "few clouds":
+            print("icon is cloud.rain")
+            return "cloud.rain.fill"
+        case "Mist", "Fog":
+            return "cloud.fog.fill"
         default:
             return "ladybug"
+        }
+    }
+    
+    var background: String {
+        switch main {
+        case "Clouds", "Rain":
+            return "cloudy_day_3"
+        case "Clear":
+            return "sunny_day"
+        case "Fog":
+            return "cloudy_day_3"
+        default:
+            return "Color3"
         }
     }
 

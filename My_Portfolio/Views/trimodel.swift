@@ -30,11 +30,22 @@ struct trimodel: View {
    
         ZStack{
             VStack{
-                
-                SceneView(scene: SCNScene(named: modelList[index].path), options: [.autoenablesDefaultLighting, .allowsCameraControl])
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-                    .foregroundColor(Color.yellow)
-                Text(modelList[index].description)
+                VStack{
+                    SceneView(scene: SCNScene(named: modelList[index].path), options: [.autoenablesDefaultLighting, .allowsCameraControl])
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 300)
+                        .foregroundColor(Color.yellow)
+                    
+                    Text(modelList[index].description).foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .padding(20)
+//                        .frame(width: UIScreen.main.bounds.width - 20)
+                        .font(.caption)
+                        .background(Color.gray)
+                        .opacity(1)
+                        .cornerRadius(40)
+                        .foregroundColor(Color.white)
+                }
             }
             HStack {
                 Button(action: {

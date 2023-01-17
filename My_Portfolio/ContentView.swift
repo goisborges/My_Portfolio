@@ -8,13 +8,9 @@
 import SwiftUI
 import UIKit
 
-
-
 struct ContentView: View {
    
     @State var isAnimated: Bool = false;
-
-    init() { UITableView.appearance().backgroundColor = UIColor.black}
     
     var body: some View {
        
@@ -57,7 +53,7 @@ struct ContentView: View {
                             .cornerRadius(20)
 //                            .frame(width: 400, height: 300)
                             .padding(5)
-                    }.frame(height: 300)
+                    }.frame(height: 400)
                         
 //                    Button("animate") {
 //                        withAnimation(.default){
@@ -67,22 +63,29 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    List {
-                        Section("Menu"){
-                            NavigationLink("Weather API", destination: WeatherView())
-                            NavigationLink("Color Picker Utility", destination: ColorPickerView())
-                            NavigationLink("About Me", destination: AboutMeView())
-                            NavigationLink("Contact", destination: ContactView())
-                            NavigationLink("Admin Page", destination: AdminView())
-                            NavigationLink("3D Model", destination: trimodel()).foregroundColor(.red).opacity(1)
+                    VStack{
+                        if #available(iOS 16.0, *) {
+                            List {
+                                Section("Menu"){
+                                    NavigationLink("Weather API", destination: WeatherView())
+                                    NavigationLink("Color Picker Utility", destination: ColorPickerView())
+                                    NavigationLink("About Me", destination: AboutMeView())
+                                    NavigationLink("Contact", destination: ContactView())
+                                    NavigationLink("Admin Page", destination: AdminView())
+                                    NavigationLink("3D Model", destination: trimodel()).opacity(1)
+                                }
+                            }.listStyle(.insetGrouped)
+                                .foregroundColor(Color.primary)
+                                .scrollContentBackground(.hidden)
+                        } else {
+                            // Fallback on earlier versions
                             
                         }
-                    }.listStyle(.insetGrouped).listRowBackground(Color.orange)
-                        
+                    }
                         
                          
                     
-                }.foregroundColor(.black)
+                }
                                 
             }
 

@@ -17,47 +17,65 @@ struct WeatherView: View {
     
     var body: some View {
         NavigationView{
-            VStack{
-                HStack{
-                    Text("City:")
-                    TextField("enter a city name", text: $cityNameInput)
-                        .task {
-                            await fetchData(city: cityNameInput)
-                        }.keyboardShortcut(.return).onSubmit {
-                            Task{
-                                await fetchData(city: cityNameInput)
-                                cityNameInput = ""
-                            }
-                        }
-                    Image(systemName: "magnifyingglass")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .onTapGesture {
-                            print(cityNameInput)
-                            Task {
-                                await fetchData(city: cityNameInput)
-                                cityNameInput = ""
-                            }
-                        }
-    
-                }.padding(15)
-                
-                Spacer()
-                Image(systemName: weathers.weather[0].icon).font(.system(size: 90)).padding(5)
+            
+            ZStack{
+                Image(weathers.weather[0].background)
+                    .resizable()
+                    .renderingMode(.original)
+                    .opacity(1)
+                    .cornerRadius(40)
+                    .ignoresSafeArea()
+                    .blur(radius: 5)
+                    
                 VStack{
-                    Text(weathers.name).font(.largeTitle)
-                    Text(weathers.weather[0].description).font(.callout).padding(.bottom)
-                    Text("Temperature: \(String(format: "%.0f", weathers.main.temp))").font(.headline)
-                    Text("Max temp: \(String(format: "%.0f", weathers.main.temp_max))")
-                    Text("Min temp: \(String(format: "%.0f", weathers.main.temp_min))")
+                        HStack{
+                            Text("City:")
+                            TextField("enter a city name", text: $cityNameInput)
+                                .task {
+                                    await fetchData(city: cityNameInput)
+                                }.keyboardShortcut(.return).onSubmit {
+                                    Task{
+                                        await fetchData(city: cityNameInput)
+                                        cityNameInput = ""
+                                    }
+                                }
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .onTapGesture {
+                                    print(cityNameInput)
+                                    Task {
+                                        await fetchData(city: cityNameInput)
+                                        cityNameInput = ""
+                                    }
+                                }
+                            
+                        }.padding(15).foregroundColor(.white)
+                            
+                    
+                    Spacer()
+                    
+                    VStack{
+                        Image(systemName: weathers.weather[0].icon).font(.system(size: 90)).padding(5)
+                        VStack{
+                            Text(weathers.name).font(.largeTitle)
+                            Text(weathers.weather[0].description).font(.callout).padding(.bottom)
+                            Text("Temperature: \(String(format: "%.0f", weathers.main.temp))").font(.headline)
+                            Text("Max temp: \(String(format: "%.0f", weathers.main.temp_max))")
+                            Text("Min temp: \(String(format: "%.0f", weathers.main.temp_min))")
+                        }.padding(30)
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 20)
+                    .padding(5)
+                    .background(Color.white.opacity(0.6).cornerRadius(20))
+                    
+                    Spacer()
+                    
+                }.task {
+                    await fetchData(city: cityNameInput)
                 }
                 
-                Spacer()
- 
-            }.task {
-                await fetchData(city: cityNameInput)
             }
-            
         }.navigationTitle("Weather Now")
         
     }
@@ -87,6 +105,8 @@ struct WeatherView: View {
             // decode the data
             if let decodedResponse = try? JSONDecoder().decode(WeatherData.self, from: data) {
                 weathers = decodedResponse
+                print(weathers.weather[0].main)
+                print( "weather main: ")
             }
         }
         catch{

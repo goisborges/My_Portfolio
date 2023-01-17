@@ -63,11 +63,11 @@ struct FirstView: View {
                         }.padding([.trailing], 20)
                
                     }.frame(width: UIScreen.main.bounds.width - 20, height: 160)
-                        .background(Color.gray)
-                        .opacity(0.8)
+                        .background(Color.white.opacity(0.9).blur(radius: 5).shadow(color: .orange, radius: 4))
+                        
                         .cornerRadius(30)
                         .padding(8)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
                         
                         
                     
