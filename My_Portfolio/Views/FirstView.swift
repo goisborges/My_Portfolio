@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftUIFontIcon
 
 struct FirstView: View {
     
-
+    // declare variables
     @State var isLinkActive: Bool = false
     
     @State var isIconActive: Bool = false
@@ -20,87 +21,109 @@ struct FirstView: View {
         
         NavigationView {
             ZStack{
-                Color("Color2").ignoresSafeArea()
+                Color("background").ignoresSafeArea()
                 
                 VStack {
                     
-                    Image("marcos_photo_copy")
+                    Image("marcos_photo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 400, height: 400)
                         .clipShape(Circle())
                         .padding(50)
                         
+                    Spacer()
+                    
                     VStack{
-                        
                         Text("Marcos Borges")
                             .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .padding(8)
+                            .fontWeight(.semibold)
+                            .padding(4)
                             
-                        Text("check my portfolio")
+                        Text("Computer Programmer")
                             .font(.subheadline)
+                            .fontWeight(.thin)
                             .onTapGesture {
                                 isLinkActive.toggle()
                             }
                         HStack {
                             Spacer()
-                            NavigationLink("Let's Go", destination: ContentView()).foregroundColor(isLinkActive ? .black : Color("Color3"))
+                            NavigationLink("Let's Go", destination: ContentView()).foregroundColor(isLinkActive ? .black : Color.orange)
                                 .padding(0)
                                 .onTapGesture {
                                     withAnimation {
                                         isLinkActive.toggle()
                                     }
                                 }
-                            Image(systemName: "arrow.right.circle.fill").padding(5)
-                        }
-               
-                    }.frame(width: UIScreen.main.bounds.width, height: 300)
-                        .background(Color.white)
-                        .padding(5)
-                    Spacer()
-                    HStack{
-//                        Spacer()
-
-                        Link(destination: URL(string: "https://www.github.com/goisborges/")!, label: {
-                            Image("github_icon")
+                            Image(systemName: "arrow.right.circle.fill")
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                            
-                        })
+                                .padding(5)
+                                .foregroundColor(.orange)
+                                .frame(width: 50, height: 50)
+                        }.padding([.trailing], 20)
+               
+                    }.frame(width: UIScreen.main.bounds.width - 20, height: 160)
+                        .background(Color.gray)
+                        .opacity(0.8)
+                        .cornerRadius(30)
+                        .padding(8)
+                        .foregroundColor(Color.white)
                         
+                        
+                    
+                    Spacer()
+                    
+                    HStack{
+                        
+                        Link(destination: URL(string: "https://www.github.com/goisborges/")!, label: {
+                            FontIcon.text(.ionicon(code: .logo_github), fontsize: 40, color: .white)
+                            
+                        }).padding()
                         
                         Link(destination: URL(string: "https://www.linkedin.com/in/marcosdegoisborges/")!, label: {
-                            Image("linkedin")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
+                            FontIcon.text(.ionicon(code: .logo_linkedin), fontsize: 40, color: .white)
                             
-                        })
-                        
-
+                        }).padding()
                         
                         Link(destination: URL(string: "mailto:goisborges@gmail.com")!, label: {
-                                Image(systemName: "mail.fill")
-                                .resizable()
-                                .foregroundColor(.black).scaledToFit()
+                            FontIcon.text(.ionicon(code: .ios_mail), fontsize: 40, color: .white)
+                               
+                        }).padding()
+                     
                         
-                                .frame(width: 30, height: 30)
-                                .scaleEffect(x: isIconActive ? 2 : 1, y: isIconActive ? 2 : 1, anchor: .leading)
-                                .onTapGesture {
-                                    withAnimation(.interpolatingSpring(mass: 1, stiffness: 300, damping: 15)){
-                                        isIconActive.toggle()
-                                        presentSheet.toggle()
-                                    }
-                                }
-                            
-                        })
+//                        Link(destination: URL(string: "https://www.github.com/goisborges/")!, label: {
+//                            Image("github_icon")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 30, height: 30)
+//
+//                        })
+//
+//                        Link(destination: URL(string: "https://www.linkedin.com/in/marcosdegoisborges/")!, label: {
+//                            Image("linkedin")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 40, height: 40)
+//                        })
+//
+//                        Link(destination: URL(string: "mailto:goisborges@gmail.com")!, label: {
+//                                Image(systemName: "mail.fill")
+//                                .resizable()
+//                                .foregroundColor(.white).scaledToFit()
+//
+//                                .frame(width: 30, height: 30)
+//                                .scaleEffect(x: isIconActive ? 2 : 1, y: isIconActive ? 2 : 1, anchor: .leading)
+//                                .onTapGesture {
+//                                    withAnimation(.interpolatingSpring(mass: 1, stiffness: 300, damping: 15)){
+//                                        isIconActive.toggle()
+//                                        presentSheet.toggle()
+//                                    }
+//                                }
+//                        })
                     }
+                    .frame(width: UIScreen.main.bounds.width, height: 50)
                     
-                        
-                    
-                }.foregroundColor(Color("Color3"))
+                }
             }
         }
     }

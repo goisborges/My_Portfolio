@@ -20,6 +20,7 @@
 		753CC0FB28C256B5008B51FC /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CC0F728C256B5008B51FC /* Project+CoreDataProperties.swift */; };
 		753CC0FC28C256B5008B51FC /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CC0F828C256B5008B51FC /* User+CoreDataClass.swift */; };
 		753CC0FD28C256B5008B51FC /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CC0F928C256B5008B51FC /* User+CoreDataProperties.swift */; };
+		753D74392975E7EE00A3C43B /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 753D74382975E7EE00A3C43B /* SwiftUIFontIcon */; };
 		754F246E2954D31800B39C85 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754F246D2954D31800B39C85 /* WeatherData.swift */; };
 		754F24702954D34100B39C85 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754F246F2954D34100B39C85 /* WeatherManager.swift */; };
 		755B335F28BFA3F7004EEE3B /* WeatherNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B335E28BFA3F7004EEE3B /* WeatherNow.swift */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				753D74392975E7EE00A3C43B /* SwiftUIFontIcon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +179,9 @@
 			dependencies = (
 			);
 			name = My_Portfolio;
+			packageProductDependencies = (
+				753D74382975E7EE00A3C43B /* SwiftUIFontIcon */,
+			);
 			productName = My_Portfolio;
 			productReference = 752F60EF28BF04D900547AB9 /* My_Portfolio.app */;
 			productType = "com.apple.product-type.application";
@@ -205,6 +210,9 @@
 				Base,
 			);
 			mainGroup = 752F60E628BF04D900547AB9;
+			packageReferences = (
+				753D74372975E7EE00A3C43B /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+			);
 			productRefGroup = 752F60F028BF04D900547AB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -465,6 +473,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		753D74372975E7EE00A3C43B /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		753D74382975E7EE00A3C43B /* SwiftUIFontIcon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 753D74372975E7EE00A3C43B /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
+			productName = SwiftUIFontIcon;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		753CC0E728C24F7B008B51FC /* UserModel.xcdatamodeld */ = {
