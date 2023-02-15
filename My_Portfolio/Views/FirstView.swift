@@ -36,7 +36,7 @@ struct FirstView: View {
                     
                     VStack{
                         Text("Marcos Borges")
-                            .font(.largeTitle)
+                            .font(.system(size: 40, weight: .bold, design: .rounded))
                             .fontWeight(.semibold)
                             .padding(4)
                             

@@ -15,10 +15,13 @@ struct WeatherView: View {
     
     @State var cityNameInput: String = "Barrie"
     
+    @State var date = Date().formatted(.dateTime.day().month(.wide).year().hour().minute())
+    
     var body: some View {
         NavigationView{
             
             ZStack{
+                
                 Image(weathers.weather[0].background)
                     .resizable()
                     .renderingMode(.original)
@@ -51,8 +54,8 @@ struct WeatherView: View {
                                 }
                             
                         }.padding(15).foregroundColor(.white)
-                            
-                    
+                           
+                   
                     Spacer()
                     
                     VStack{
@@ -65,20 +68,24 @@ struct WeatherView: View {
                             Text("Min temp: \(String(format: "%.0f", weathers.main.temp_min))")
                         }.padding(30)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 20)
+                    .frame(width: UIScreen.main.bounds.width - 40)
                     .padding(5)
                     .background(Color.white.opacity(0.6).cornerRadius(20))
                     
                     Spacer()
                     
+                    Text("\(date)").foregroundColor(.white).font(.callout)
+                    
                 }.task {
                     await fetchData(city: cityNameInput)
                 }
-                
             }
+  
         }.navigationTitle("Weather Now")
-        
     }
+    
+    
+    
     func fetchData(city: String) async{
         //retrieve the API KEY
         let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String
