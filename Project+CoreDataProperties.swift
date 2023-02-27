@@ -15,6 +15,10 @@ extension Project {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Project> {
         return NSFetchRequest<Project>(entityName: "Project")
     }
+    
+    @nonobjc public class func allItems() -> NSFetchRequest<Project> {
+        return NSFetchRequest<Project>(entityName: "Project")
+    }
 
     @NSManaged public var projectName: String?
     @NSManaged public var projectLanguage: String?
